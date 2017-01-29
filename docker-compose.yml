@@ -1,0 +1,14 @@
+version: "2"
+
+services:
+
+  phpmyfaq:
+    build: ./phpmyfaq
+    links:
+    - mariadb:db
+    ports:
+    - "80:80"
+
+  mariadb:
+    image: mariadb:10.1.21
+
