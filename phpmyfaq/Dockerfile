@@ -13,15 +13,15 @@ RUN { \
     echo '\tAllowOverride none'; \
     echo '</Directory>'; \
     echo '</VirtualHost>'; \
-  } | tee "$APACHE_CONFDIR/site-available/phpmyfaq.conf" \
+  } | tee "$APACHE_CONFDIR/sites-available/phpmyfaq.conf" \
   && a2ensite phpmyfaq \
-  && a2dissite 000-default
+  && a2dissite 000-default;
 
 #=== Configure php ===
 RUN { \
     echo 'memory_limit = 64M'; \
     echo 'date.timezone = Europe/Paris'; \
-  } | tee "$PHP_INI_DIR/php.ini"
+  } | tee "$PHP_INI_DIR/php.ini";
 
 #=== Install php dependencies ===
 RUN apt-get update && apt-get install -y \
@@ -36,7 +36,7 @@ RUN apt-get update && apt-get install -y \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install -j$(nproc) gd \
   \
-  && docker-php-source delete
+  && docker-php-source delete;
 
 #=== Download phpMyFAQ source code ===
 RUN set -xe; \
@@ -45,19 +45,19 @@ RUN set -xe; \
     git \
   '; \
   \
-  apt-get update;
+  apt-get update; \
   apt-get install -y --no-install-recommends $fetchDeps; \
   rm -r /var/lib/apt/lists/*; \
   \
-  cd /var/www/html;
-  git clone "git@github.com:thorsten/phpMyFAQ.git"; \
+  cd /var/www/html; \
+  git clone "git://github.com/thorsten/phpMyFAQ.git"; \
   \
   apt-get purge -y --auto-remove $fetchDeps; \
   \
-  chown -R $APACHE_RUN_USER. /var/www/html/phpMyFAQ
+  chown -R $APACHE_RUN_USER. /var/www/html/phpMyFAQ;
 
 WORKDIR /var/www/html/phpMyFAQ
-USER apache
+USER $APACHE_RUN_USER
 
 #=== Get composer ===
 RUN curl -s https://getcomposer.org/installer | php;
@@ -67,7 +67,7 @@ RUN { \
     echo '<?php'; \
     echo 'phpinfo();'; \
     echo '?>'; \
-  } | tee "./info.php" \
+  } | tee "./info.php";
 
 #=== Install ===
 RUN set -xe; \

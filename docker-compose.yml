@@ -11,4 +11,9 @@ services:
 
   mariadb:
     image: mariadb:10.1.21
+    environment:
+    - MYSQL_ROOT_PASSWORD=iop
+    - MYSQL_DATABASE=phpmyfaq
+    - MYSQL_USER=phpmyfaq
+    - MYSQL_PASSWORD=phpmyfaq
 
