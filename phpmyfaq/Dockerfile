@@ -52,7 +52,7 @@ RUN set -xe; \
   git clone "git://github.com/thorsten/phpMyFAQ.git"; \
   \
   cd ./phpMyFAQ; \
-  curl -s https://getcomposer.org/installer | php;
+  curl -s https://getcomposer.org/installer | php; \
   php composer.phar install; \
   npm install; \
   bower install; \
