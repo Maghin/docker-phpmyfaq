@@ -54,7 +54,7 @@ RUN set -xe; \
   \
   apt-get purge -y --auto-remove $fetchDeps; \
   \
-  chown -R $APACHE_RUN_USER. /var/www/html/phpMyFAQ;
+  chown -R "$APACHE_RUN_USER." /var/www/html/phpMyFAQ;
 
 WORKDIR /var/www/html/phpMyFAQ
 USER $APACHE_RUN_USER
