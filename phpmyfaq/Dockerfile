@@ -44,6 +44,7 @@ RUN set -xe; \
   \
   fetchDeps=' \
     git \
+    unzip \
   ' \
   \
   && apt-get update \
