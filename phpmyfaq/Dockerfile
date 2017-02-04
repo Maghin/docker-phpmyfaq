@@ -81,9 +81,9 @@ RUN { \
   } | tee "$PHP_INI_DIR/php.ini";
 
 #=== Set volumes ===
-#VOLUME /var/www/html/phpmyfaq/attachments \
-#       /var/www/html/phpmyfaq/data \
-#       /var/www/html/phpmyfaq/images
+VOLUME /var/www/html/phpmyfaq/attachments \
+       /var/www/html/phpmyfaq/data \
+       /var/www/html/phpmyfaq/images
 
 #=== !!! DEBUG !!! phpinfo !!! REMOVE !!! ===
 RUN { \
