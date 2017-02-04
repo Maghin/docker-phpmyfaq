@@ -15,7 +15,7 @@ services:
     - ./volumes/phpmyfaq-images:/var/www/html/phpmyfaq/images
 
   phpmyadmin:
-    image: phpmyadmin:phpmyadmin
+    image: phpmyadmin/phpmyadmin
     links:
     - mariadb:db
     ports:
