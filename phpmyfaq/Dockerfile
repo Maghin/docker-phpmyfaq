@@ -41,8 +41,9 @@ RUN set -xe; \
   runtimeDeps=' \
     re2c \
     libmcrypt-dev \
-    zlib1g-dev \
     file \
+    zlib1g-dev \
+    libxml2-dev
   ' \
   && apt-get update && apt-get install -y ${runtimeDeps} \
   \
