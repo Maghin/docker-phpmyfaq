@@ -43,7 +43,7 @@ RUN set -xe; \
     libmcrypt-dev \
     file \
     zlib1g-dev \
-    libxml2-dev
+    libxml2-dev \
   ' \
   && apt-get update && apt-get install -y ${runtimeDeps} \
   \
