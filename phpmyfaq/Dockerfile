@@ -3,7 +3,7 @@ FROM php:5.6.30-apache
 MAINTAINER MERHYLSTUDIO <maghin@merhylstudio.fr>
 
 #=== Download phpMyFAQ source code ===
-ADD phpMyFAQ-2.9.6.tar.gz /var/www/html/phpMyFAQ
+ADD phpMyFAQ-2.9.6.tar.gz .
 
 #=== Install php dependencies ===
 RUN set -xe \
@@ -25,15 +25,15 @@ RUN set -xe \
 #=== fix rights ===
 RUN set -xe \
   \
-  && chown -R www-data:www-data /var/www/html
+  && chown -R www-data:www-data ./phpmyfaq
 
 #=== Configure apache ===
 RUN { \
     echo '<VirtualHost *:80>'; \
     echo 'ServerName phpmyfaq'; \
-    echo 'DocumentRoot /var/www/html/phpMyFAQ'; \
+    echo 'DocumentRoot /var/www/html/phpmyfaq'; \
     echo; \
-    echo '<Directory /var/www/html/phpMyFAQ>'; \
+    echo '<Directory /var/www/html/phpmyfaq>'; \
     echo '\tOptions -Indexes'; \
     echo '\tAllowOverride none'; \
     echo '</Directory>'; \
