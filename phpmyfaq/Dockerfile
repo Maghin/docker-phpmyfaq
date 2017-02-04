@@ -46,7 +46,7 @@ RUN set -xe; \
   ' \
   && apt-get update && apt-get install -y ${runtimeDeps} \
   \
-  && docker-php-ext-install mcrypt fileinfo zip unzip soap mysqli json \
+  && docker-php-ext-install mcrypt fileinfo zip soap mysqli json \
   \
   && rm -rf /var/lib/apt/lists/*
 
