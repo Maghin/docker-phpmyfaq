@@ -37,7 +37,7 @@ services:
 
   elasticsearch:
     image: elasticsearch:5.2.0
-    command: -Des.node.name="phpMyFAQ"
+    command: "-Des.node.name=phpMyFAQ"
     volumes:
     - ./volumes/elasticsearch-data:/usr/share/elasticsearch/data
 
