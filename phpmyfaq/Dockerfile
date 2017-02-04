@@ -39,7 +39,7 @@ RUN set -xe; \
 RUN set -xe; \
   \
   runtimeDeps=' \
-    re2c
+    re2c \
     libmcrypt-dev \
     zlib1g-dev \
     file \
