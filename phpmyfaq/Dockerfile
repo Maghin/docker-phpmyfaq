@@ -105,3 +105,18 @@ RUN { \
     echo '?>'; \
   } | tee "./phpmyfaq/info.php"
 
+#=== Entrypoint ===
+RUN { \
+    echo '#!/bin/bash'; \
+    echo 'set -e'; \
+    echo; \
+    echo 'chown www-data:www-data ./phpmyfaq/www-data'; \
+    echo 'chown www-data:www-data ./phpmyfaq/data'; \
+    echo 'chown www-data:www-data ./phpmyfaq/images'; \
+    echo 'chown www-data:www-data ./phpmyfaq/config'; \
+    echo; \
+    echo 'docker-php-entrypoint "$@"'; \
+  } | tee "/usr/local/bin/phpmyfaq-entrypoint"
+
+ENTRYPOINT [ phpmyfaq-entrypoint ]
+

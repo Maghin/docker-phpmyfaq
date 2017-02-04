@@ -1,0 +1,9 @@
+<?php
+$DB['server'] = '';
+$DB['port'] = '';
+$DB['user'] = '';
+$DB['password'] = '';
+$DB['db'] = '';
+$DB['prefix'] = '';
+$DB['type'] = '';
+
