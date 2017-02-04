@@ -3,7 +3,7 @@ FROM php:5.6.30-apache
 MAINTAINER MERHYLSTUDIO <maghin@merhylstudio.fr>
 
 #=== Download phpMyFAQ source code ===
-ADD http://download.phpmyfaq.de/phpMyFAQ-2.9.6.tar.gz /var/www/html/
+ADD phpMyFAQ-2.9.6.tar.gz /var/www/html/phpMyFAQ
 
 #=== Install php dependencies ===
 RUN set -xe \
@@ -18,9 +18,9 @@ RUN set -xe \
   && rm -r /var/lib/apt/lists/* \
   \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-  && docker-php-ext-install -j$(nproc) gd \
+  && docker-php-ext-install gd \
   \
-  && docker-php-ext-install -j$(nproc) iconv mcrypt
+  && docker-php-ext-install iconv mcrypt
 
 #=== fix rights ===
 RUN set -xe \
