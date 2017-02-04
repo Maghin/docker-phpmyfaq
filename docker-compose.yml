@@ -11,6 +11,7 @@ services:
     - "8080:80"
     volumes:
     - ./volumes/phpmyfaq-attachments:/var/www/html/phpmyfaq/attachments
+    - ./volumes/phpmyfaq-config:/var/www/html/phpmyfaq/config
     - ./volumes/phpmyfaq-data:/var/www/html/phpmyfaq/data
     - ./volumes/phpmyfaq-images:/var/www/html/phpmyfaq/images
 
