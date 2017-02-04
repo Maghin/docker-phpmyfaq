@@ -5,7 +5,8 @@ services:
   phpmyfaq:
     build: ./phpmyfaq
     links:
-    - mariadb:db
+    - mariadb
+    - elasticsearch
     ports:
     - "80:80"
 
@@ -17,3 +18,7 @@ services:
     - MYSQL_USER=phpmyfaq
     - MYSQL_PASSWORD=phpmyfaq
 
+  elasticsearch:
+    image: elasticsearch:5.2.0
+    command:
+    - -Des.node.name="phpMyFAQ"

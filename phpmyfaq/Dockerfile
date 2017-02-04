@@ -5,11 +5,6 @@ MAINTAINER MERHYLSTUDIO <maghin@merhylstudio.fr>
 #=== Download phpMyFAQ source code ===
 ADD http://download.phpmyfaq.de/phpMyFAQ-2.9.6.tar.gz /var/www/html/
 
-#=== and install ===
-RUN set -xe \
-  \
-  && chown -R "$APACHE_RUN_USER." /var/www/html
-
 #=== Install php dependencies ===
 RUN set -xe \
   \
@@ -26,6 +21,11 @@ RUN set -xe \
   && docker-php-ext-install -j$(nproc) gd \
   \
   && docker-php-ext-install -j$(nproc) iconv mcrypt
+
+#=== fix rights ===
+RUN set -xe \
+  \
+  && chown -R www-data:www-data /var/www/html
 
 #=== Configure apache ===
 RUN { \
