@@ -52,7 +52,12 @@ RUN set -xe; \
   && rm -rf /var/lib/apt/lists/*
 
 #=== Fix rights ===
-RUN chown -R www-data:www-data ./phpmyfaq
+RUN set -xe \
+  \
+  && mkdir ./phpmyfaq/attachments \
+  && mkdir ./phpmyfaq/data \
+  && mkdir ./phpmyfaq/images \
+  && chown -R www-data:www-data ./phpmyfaq
 
 #=== Configure apache ===
 RUN { \
@@ -74,6 +79,11 @@ RUN { \
     echo 'memory_limit = 64M'; \
     echo 'date.timezone = Europe/Paris'; \
   } | tee "$PHP_INI_DIR/php.ini";
+
+#=== Set volumes ===
+#VOLUME /var/www/html/phpmyfaq/attachments \
+#       /var/www/html/phpmyfaq/data \
+#       /var/www/html/phpmyfaq/images
 
 #=== !!! DEBUG !!! phpinfo !!! REMOVE !!! ===
 RUN { \
