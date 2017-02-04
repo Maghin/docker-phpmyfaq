@@ -35,7 +35,7 @@ RUN set -xe \
       \
   && rm -r /var/lib/apt/lists/* \
   \
-  && docker-php-ext-install iconv mcrypt zip php soap mysqli json xmlwriter ldap fileinfo
+  && docker-php-ext-install iconv mcrypt zip soap mysqli json xmlwriter ldap fileinfo
 
 #=== Fix rights ===
 RUN set -xe \
