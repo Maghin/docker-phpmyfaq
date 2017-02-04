@@ -25,6 +25,7 @@ RUN set -xe \
 #=== Fix rights ===
 RUN set -xe \
   \
+  && mkdir ./phpmyfaq/{attachments,data,images} \
   && chown -R www-data:www-data ./phpmyfaq
 
 #=== Configure apache ===
