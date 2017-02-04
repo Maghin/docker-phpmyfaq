@@ -5,29 +5,41 @@ MAINTAINER MERHYLSTUDIO <maghin@merhylstudio.fr>
 #=== Add phpMyFAQ source code ===
 ADD phpMyFAQ-2.9.6.tar.gz .
 
-#=== Install php dependencies ===
+#=== Install gd (php dependencie) ===
+RUN set -xe \
+  \
+  && buildDeps=' \
+    libpng12-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+  ' \
+  \
+  && apt-get update && apt-get install -y ${buildDeps} \
+  \
+  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+  && docker-php-ext-install gd \
+  \
+  && apt-get purge -y ${buildDeps} \
+  && rm -rf /var/lib/apt/lists/*
+
+#=== Install other php dependencies ===
 RUN set -xe \
   \
   && apt-get update && apt-get install -y \
       \
-      libfreetype6-dev \
-      libjpeg62-turbo-dev \
-      libpng12-dev \
       libmcrypt-dev \
       zlib1g-dev \
+      libxml2-dev \
+      libldap2-dev \
+      file \
       \
   && rm -r /var/lib/apt/lists/* \
   \
-  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-  && docker-php-ext-install gd \
-  && docker-php-ext-install iconv mcrypt zip
+  && docker-php-ext-install iconv mcrypt zip php soap mysqli json xmlwriter ldap fileinfo
 
 #=== Fix rights ===
 RUN set -xe \
   \
-  && mkdir ./phpmyfaq/attachments \
-  && mkdir ./phpmyfaq/data \
-  && mkdir ./phpmyfaq/images \
   && chown -R www-data:www-data ./phpmyfaq
 
 #=== Configure apache ===
