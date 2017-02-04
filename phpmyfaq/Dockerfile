@@ -54,10 +54,10 @@ RUN set -xe; \
 #=== Fix rights ===
 RUN set -xe \
   \
-  && mkdir ./phpmyfaq/attachments \
-  && mkdir ./phpmyfaq/data \
-  && mkdir ./phpmyfaq/images \
-  && chown -R www-data:www-data ./phpmyfaq
+  && chown -R www-data:www-data ./phpmyfaq \
+  && mkdir ./phpmyfaq/attachments && chmod +x ./phpmyfaq/attachments \
+  && mkdir ./phpmyfaq/data && chmod +x ./phpmyfaq/data \
+  && mkdir ./phpmyfaq/images && chmod +x ./phpmyfaq/images
 
 #=== Configure apache ===
 RUN { \
@@ -79,11 +79,6 @@ RUN { \
     echo 'memory_limit = 64M'; \
     echo 'date.timezone = Europe/Paris'; \
   } | tee "$PHP_INI_DIR/php.ini";
-
-#=== Set volumes ===
-VOLUME /var/www/html/phpmyfaq/attachments \
-       /var/www/html/phpmyfaq/data \
-       /var/www/html/phpmyfaq/images
 
 #=== !!! DEBUG !!! phpinfo !!! REMOVE !!! ===
 RUN { \
