@@ -93,7 +93,8 @@ RUN { \
 #=== Enabling htaccess for search engine optimisations ===
 RUN set -xe \
   \
-  && a2enmod rewrite \
+  && a2enmod rewrite headers \
+  \
   && mv ./phpmyfaq/_.htaccess ./phpmyfaq/.htaccess \
   && sed -ri 's~RewriteBase /phpmyfaq/~RewriteBase /~' ./phpmyfaq/.htaccess
 
