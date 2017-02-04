@@ -6,14 +6,13 @@ MAINTAINER MERHYLSTUDIO <maghin@merhylstudio.fr>
 ADD phpMyFAQ-2.9.6.tar.gz .
 
 #=== Install gd (php dependencie) ===
-RUN set -xe \
+RUN set -xe; \
   \
   && buildDeps=' \
     libpng12-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
   ' \
-  \
   && apt-get update && apt-get install -y ${buildDeps} \
   \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -21,26 +20,38 @@ RUN set -xe \
   \
   && apt-get purge -y ${buildDeps} \
   && rm -rf /var/lib/apt/lists/*
-
+ 
+#=== Install ldap (php dependencie) ===
+RUN set -xe; \
+  \
+  && buildDeps=' \
+    libldap2-dev \
+  ' \
+  && apt-get update && apt-get install -y ${buildDeps} \
+  \
+  && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
+  && docker-php-ext-install ldap \
+  \
+  && apt-get purge -y ${buildDeps} \
+  && rm -rf /var/lib/apt/lists/*
+ 
 #=== Install other php dependencies ===
-RUN set -xe \
+RUN set -xe; \
   \
-  && apt-get update && apt-get install -y \
-      \
-      libmcrypt-dev \
-      zlib1g-dev \
-      libxml2-dev \
-      libldap2-dev \
-      file \
-      \
-  && rm -r /var/lib/apt/lists/* \
+  runtimeDeps=' \
+    re2c
+    libmcrypt-dev \
+    zlib1g-dev \
+    file \
+  ' \
+  && apt-get update && apt-get install -y ${runtimeDeps} \
   \
-  && docker-php-ext-install iconv mcrypt zip soap mysqli json xmlwriter ldap fileinfo
+  && docker-php-ext-install mcrypt fileinfo zip unzip soap mysqli json \
+  \
+  && rm -rf /var/lib/apt/lists/*
 
 #=== Fix rights ===
-RUN set -xe \
-  \
-  && chown -R www-data:www-data ./phpmyfaq
+RUN chown -R www-data:www-data ./phpmyfaq
 
 #=== Configure apache ===
 RUN { \
