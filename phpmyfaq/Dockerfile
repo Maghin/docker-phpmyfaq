@@ -8,11 +8,11 @@ ADD phpMyFAQ-2.9.6.tar.gz .
 #=== Install gd (php dependencie) ===
 RUN set -xe; \
   \
-  && buildDeps=' \
+  buildDeps=' \
     libpng12-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
-  ' \
+  '; \
   && apt-get update && apt-get install -y ${buildDeps} \
   \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -24,9 +24,9 @@ RUN set -xe; \
 #=== Install ldap (php dependencie) ===
 RUN set -xe; \
   \
-  && buildDeps=' \
+  buildDeps=' \
     libldap2-dev \
-  ' \
+  '; \
   && apt-get update && apt-get install -y ${buildDeps} \
   \
   && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
@@ -43,7 +43,7 @@ RUN set -xe; \
     libmcrypt-dev \
     zlib1g-dev \
     file \
-  ' \
+  '; \
   && apt-get update && apt-get install -y ${runtimeDeps} \
   \
   && docker-php-ext-install mcrypt fileinfo zip unzip soap mysqli json \
