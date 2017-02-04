@@ -52,12 +52,16 @@ RUN set -xe; \
   && rm -rf /var/lib/apt/lists/*
 
 #=== Fix rights ===
-RUN set -xe \
+RUN set -xe; \
   \
-  && chown -R www-data:www-data ./phpmyfaq \
-  && mkdir ./phpmyfaq/attachments && chmod +x ./phpmyfaq/attachments \
-  && mkdir ./phpmyfaq/data && chmod +x ./phpmyfaq/data \
-  && mkdir ./phpmyfaq/images && chmod +x ./phpmyfaq/images
+  folders=' \
+    ./phpmyfaq/attachments \
+    ./phpmyfaq/data \
+    ./phpmyfaq/images \
+  ' \
+  && mkdir ${folders} \
+  && chmod 775 ${folders} \
+  && chown -R www-data:www-data ./phpmyfaq
 
 #=== Configure apache ===
 RUN { \
@@ -72,18 +76,19 @@ RUN { \
     echo '</VirtualHost>'; \
   } | tee "$APACHE_CONFDIR/sites-available/phpmyfaq.conf" \
   && a2ensite phpmyfaq \
-  && a2dissite 000-default;
+  && a2dissite 000-default \
+  && echo "ServerName localhost" >> "$APACHE_CONFDIR/apache2.conf"
 
 #=== Configure php ===
 RUN { \
     echo 'memory_limit = 64M'; \
     echo 'date.timezone = Europe/Paris'; \
-  } | tee "$PHP_INI_DIR/php.ini";
+  } | tee "$PHP_INI_DIR/php.ini"
 
 #=== !!! DEBUG !!! phpinfo !!! REMOVE !!! ===
 RUN { \
     echo '<?php'; \
     echo 'phpinfo();'; \
     echo '?>'; \
-  } | tee "./info.php";
+  } | tee "./info.php"
 
