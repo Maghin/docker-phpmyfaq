@@ -13,14 +13,14 @@ RUN set -xe \
       libfreetype6-dev \
       libjpeg62-turbo-dev \
       libpng12-dev \
-      \
       libmcrypt-dev \
+      zlib1g-dev \
+      \
   && rm -r /var/lib/apt/lists/* \
   \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install gd \
-  \
-  && docker-php-ext-install iconv mcrypt
+  && docker-php-ext-install iconv mcrypt zip
 
 #=== Fix rights ===
 RUN set -xe \
