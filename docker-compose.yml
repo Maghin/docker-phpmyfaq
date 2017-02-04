@@ -8,7 +8,11 @@ services:
     - mariadb
     - elasticsearch
     ports:
-    - "80:80"
+    - "8080:80"
+    volumes:
+    - ./volumes/phpmyfaq-attachments:/var/www/html/phpmyfaq/attachments
+    - ./volumes/phpmyfaq-data:/var/www/html/phpmyfaq/data
+    - ./volumes/phpmyfaq-images:/var/www/html/phpmyfaq/images
 
   mariadb:
     image: mariadb:10.1.21
@@ -17,6 +21,17 @@ services:
     - MYSQL_DATABASE=phpmyfaq
     - MYSQL_USER=phpmyfaq
     - MYSQL_PASSWORD=phpmyfaq
+    volumes:
+    - ./volumes/mariadb:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:phpmyadmin
+    link:
+    - mariadb:db
+    volumes:
+    - ./volumes/phpmyadmin:/sessions
+    environment:
+    - MYSQL_ROOT_PASSWORD=iop
 
   elasticsearch:
     image: elasticsearch:5.2.0
