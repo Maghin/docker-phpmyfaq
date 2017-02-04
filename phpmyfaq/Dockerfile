@@ -2,7 +2,7 @@ FROM php:5.6.30-apache
 
 MAINTAINER MERHYLSTUDIO <maghin@merhylstudio.fr>
 
-#=== Download phpMyFAQ source code ===
+#=== Add phpMyFAQ source code ===
 ADD phpMyFAQ-2.9.6.tar.gz .
 
 #=== Install php dependencies ===
@@ -22,7 +22,7 @@ RUN set -xe \
   \
   && docker-php-ext-install iconv mcrypt
 
-#=== fix rights ===
+#=== Fix rights ===
 RUN set -xe \
   \
   && chown -R www-data:www-data ./phpmyfaq
