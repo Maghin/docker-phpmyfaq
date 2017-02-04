@@ -21,7 +21,7 @@ services:
     ports:
     - "8001:80"
     volumes:
-    - ./volumes/phpmyadmin:/sessions
+    - ./volumes/phpmyadmin-sessions:/sessions
     environment:
     - MYSQL_ROOT_PASSWORD=iop
 
@@ -33,9 +33,11 @@ services:
     - MYSQL_USER=phpmyfaq
     - MYSQL_PASSWORD=phpmyfaq
     volumes:
-    - ./volumes/mariadb:/var/lib/mysql
+    - ./volumes/mariadb-data:/var/lib/mysql
 
   elasticsearch:
     image: elasticsearch:5.2.0
     command: -Des.node.name="phpMyFAQ"
+    volumes:
+    - ./volumes/elasticsearch-data:/usr/share/elasticsearch/data
 
