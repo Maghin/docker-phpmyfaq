@@ -44,6 +44,7 @@ RUN set -xe; \
     file \
     zlib1g-dev \
     libxml2-dev \
+    sendmail \
   ' \
   && apt-get update && apt-get install -y ${runtimeDeps} \
   \
@@ -71,24 +72,34 @@ RUN { \
     echo; \
     echo '<Directory /var/www/html/phpmyfaq>'; \
     echo '\tOptions -Indexes'; \
-    echo '\tAllowOverride none'; \
+    echo '\tAllowOverride all'; \
     echo '</Directory>'; \
     echo '</VirtualHost>'; \
   } | tee "$APACHE_CONFDIR/sites-available/phpmyfaq.conf" \
+  \
   && a2ensite phpmyfaq \
   && a2dissite 000-default \
   && echo "ServerName localhost" >> "$APACHE_CONFDIR/apache2.conf"
 
 #=== Configure php ===
 RUN { \
-    echo 'memory_limit = 64M'; \
     echo 'date.timezone = Europe/Paris'; \
+    echo 'register_globals = off'; \
+    echo 'safe_mode = off'; \
+    echo 'memory_limit = 64M'; \
+    echo 'file_upload = on'; \
   } | tee "$PHP_INI_DIR/php.ini"
+
+#=== Enabling htaccess for search engine optimisations ===
+RUN set -xe \
+  \
+  && mv ./phpmyfaq/_.htaccess ./phpmyfaq/.htaccess \
+  && sed -ri 's~RewriteBase /phpmyfaq/~RewriteBase /~' ./phpmyfaq/.htaccess
 
 #=== !!! DEBUG !!! phpinfo !!! REMOVE !!! ===
 RUN { \
     echo '<?php'; \
     echo 'phpinfo();'; \
     echo '?>'; \
-  } | tee "./info.php"
+  } | tee "./phpmyfaq/info.php"
 
