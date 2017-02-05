@@ -3,7 +3,7 @@ version: "2"
 services:
 
   phpmyfaq:
-    build: ./phpmyfaq
+    build: .
     links:
     - mariadb
     - elasticsearch
