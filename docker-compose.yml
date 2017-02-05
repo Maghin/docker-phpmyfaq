@@ -10,10 +10,10 @@ services:
     ports:
     - "8080:80"
     volumes:
-    - ./volumes/phpmyfaq-attachments:/var/www/html/phpmyfaq/attachments
-    - ./volumes/phpmyfaq-data:/var/www/html/phpmyfaq/data
-    - ./volumes/phpmyfaq-images:/var/www/html/phpmyfaq/images
-    - ./config:/var/www/html/phpmyfaq/config
+    - attachments:/var/www/html/phpmyfaq/attachments
+    - config:/var/www/html/phpmyfaq/config
+    - data:/var/www/html/phpmyfaq/data
+    - images:/var/www/html/phpmyfaq/images
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -22,9 +22,7 @@ services:
     ports:
     - "8001:80"
     volumes:
-    - ./volumes/phpmyadmin-sessions:/sessions
-    environment:
-    - MYSQL_ROOT_PASSWORD=iop
+    - phpmyadmin-sessions:/sessions
 
   mariadb:
     image: mariadb:10.1.21
@@ -34,10 +32,27 @@ services:
     - MYSQL_USER=phpmyfaq
     - MYSQL_PASSWORD=phpmyfaq
     volumes:
-    - ./volumes/mariadb-data:/var/lib/mysql
+    - mariadb-data:/var/lib/mysql
 
   elasticsearch:
     image: elasticsearch:5.2.0
     volumes:
-    - ./volumes/elasticsearch-data:/usr/share/elasticsearch/data
+    - es-data:/usr/share/elasticsearch/data
+
+volumes:
+  attachements:
+    driver: local
+  config:
+    driver: local
+    external:
+      name: phpmyfaq-config
+  data:
+    driver: local
+  images:
+    driver: local
+  phpmyadmin:
+    driver: local
+  es-data:
+    driver: local
+
 
