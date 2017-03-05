@@ -1,6 +1,6 @@
-FROM php:5.6.30-apache
+FROM php:5.6-apache
 
-MAINTAINER MERHYLSTUDIO <maghin@merhylstudio.fr>
+MAINTAINER MERHYLSTUDIO
 
 #=== Add phpMyFAQ source code ===
 ADD phpMyFAQ-2.9.6.tar.gz .
@@ -97,13 +97,6 @@ RUN set -xe \
   \
   && mv ./phpmyfaq/_.htaccess ./phpmyfaq/.htaccess \
   && sed -ri 's~RewriteBase /phpmyfaq/~RewriteBase /~' ./phpmyfaq/.htaccess
-
-#=== !!! DEBUG !!! phpinfo !!! REMOVE !!! ===
-RUN { \
-    echo '<?php'; \
-    echo 'phpinfo();'; \
-    echo '?>'; \
-  } | tee "./phpmyfaq/info.php"
 
 #=== Entrypoint ===
 RUN { \
