@@ -54,7 +54,7 @@ ENV PHPMYFAQ_VERSION=2.9.6
 RUN set -x \
   && curl -sL http://download.phpmyfaq.de/phpMyFAQ-${PHPMYFAQ_VERSION}.tar.gz | tar xz \
   \
-  folders=' \
+  && folders=' \
     ./phpmyfaq/attachments \
     ./phpmyfaq/data \
     ./phpmyfaq/images \
