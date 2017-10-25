@@ -15,7 +15,7 @@
 # User Variables
 DRY_RUN=yes # Comment this line to disable dry run mode
 PKG_NAME="phpmyfaq" # Package or docker image name
-DOCKER_REPO="docker.io/merhylstudio" # registry[:port][/namespace]
+DOCKER_REPO="merhylstudio" # registry[:port][/namespace]
 
 
 # Function: msg_help
@@ -221,7 +221,12 @@ create_dist_tarball() {
             fi
 
             # docker login
-            exec_command docker login $DOCKER_REPO
+            if [ "$DOCKER_REPO" =~ "/" ]; then
+                exec_command docker login $DOCKER_REPO
+            else
+                # if no registry spefified pushing to docker.io
+                exec_command docker login
+            fi
             if [ $? -ne 0 ]; then
                 die "Couldn't connect to docker repository" \
                     "Try to fix this manually"
