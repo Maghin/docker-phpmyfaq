@@ -1,9 +1,6 @@
-FROM php:5.6.30-apache
+FROM php:5.6.31-apache
 
 MAINTAINER MERHYLSTUDIO <maghin@merhylstudio.fr>
-
-#=== Add phpMyFAQ source code ===
-ADD phpMyFAQ-2.9.6.tar.gz .
 
 #=== Install gd (php dependencie) ===
 RUN set -xe; \
@@ -20,7 +17,7 @@ RUN set -xe; \
   \
   && apt-get purge -y ${buildDeps} \
   && rm -rf /var/lib/apt/lists/*
- 
+
 #=== Install ldap (php dependencie) ===
 RUN set -xe; \
   \
@@ -34,7 +31,7 @@ RUN set -xe; \
   \
   && apt-get purge -y ${buildDeps} \
   && rm -rf /var/lib/apt/lists/*
- 
+
 #=== Install other php dependencies ===
 RUN set -xe; \
   \
@@ -51,6 +48,10 @@ RUN set -xe; \
   && docker-php-ext-install mcrypt fileinfo zip soap mysqli json \
   \
   && rm -rf /var/lib/apt/lists/*
+
+#=== Add phpMyFAQ source code ===
+ENV PHPMYFAQ_VERSION=2.9.6
+RUN curl -sL http://download.phpmyfaq.de/phpMyFAQ-${PHPMYFAQ_VERSION}.tar.gz | tar xz
 
 #=== Fix rights ===
 RUN set -xe; \
