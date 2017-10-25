@@ -50,11 +50,7 @@ RUN set -xe; \
   && rm -rf /var/lib/apt/lists/*
 
 #=== Add phpMyFAQ source code and set permissions ===
-<<<<<<< HEAD
-ENV PHPMYFAQ_VERSION=2.9.7
-=======
 ENV PHPMYFAQ_VERSION=2.9.8
->>>>>>> dev
 RUN set -x \
   && curl -sL http://download.phpmyfaq.de/phpMyFAQ-${PHPMYFAQ_VERSION}.tar.gz | tar xz \
   \
