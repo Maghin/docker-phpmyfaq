@@ -221,7 +221,7 @@ create_dist_tarball() {
             fi
 
             # docker login
-            if [ "$DOCKER_REPO" =~ "/" ]; then
+            if [[ "$DOCKER_REPO" =~ "/" ]]; then
                 exec_command docker login $DOCKER_REPO
             else
                 # if no registry spefified pushing to docker.io
