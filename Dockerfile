@@ -97,13 +97,6 @@ RUN set -xe \
   && mv ./phpmyfaq/_.htaccess ./phpmyfaq/.htaccess \
   && sed -ri 's~RewriteBase /phpmyfaq/~RewriteBase /~' ./phpmyfaq/.htaccess
 
-#=== !!! DEBUG !!! phpinfo !!! REMOVE !!! ===
-RUN { \
-    echo '<?php'; \
-    echo 'phpinfo();'; \
-    echo '?>'; \
-  } | tee "./phpmyfaq/info.php"
-
 #=== Entrypoint ===
 RUN { \
     echo '#!/bin/bash'; \
