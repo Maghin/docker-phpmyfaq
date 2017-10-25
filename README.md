@@ -2,6 +2,7 @@
 
 [![Docker Build Status](https://img.shields.io/docker/build/merhylstudio/phpmyfaq.svg)](https://hub.docker.com/r/merhylstudio/phpmyfaq/)
 [![Size](https://shields.beevelop.com/docker/image/image-size/merhylstudio/phpmyfaq/2.9.7.svg)](https://hub.docker.com/r/merhylstudio/phpmyfaq/)
+[![Layers](https://shields.beevelop.com/docker/image/layers/merhylstudio/phpmyfaq/2.9.7.svg)](https://hub.docker.com/r/merhylstudio/phpmyfaq/)
 
 ## What is phpMyFAQ?
 
