@@ -27,7 +27,7 @@ services:
     - MYSQL_ROOT_PASSWORD=iop
 
   mariadb:
-    image: mariadb:10.1.21
+    image: mariadb:10.2.9
     environment:
     - MYSQL_ROOT_PASSWORD=iop
     - MYSQL_DATABASE=phpmyfaq
@@ -37,7 +37,6 @@ services:
     - ./volumes/mariadb-data:/var/lib/mysql
 
   elasticsearch:
-    image: elasticsearch:5.2.0
+    image: elasticsearch:5.5.2
     volumes:
     - ./volumes/elasticsearch-data:/usr/share/elasticsearch/data
-
