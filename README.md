@@ -1,6 +1,5 @@
 # PhpMyFaq on Docker
 
-[![Docker Build Status](https://img.shields.io/docker/build/merhylstudio/phpmyfaq.svg)](https://hub.docker.com/r/merhylstudio/phpmyfaq/)
 [![Size](https://shields.beevelop.com/docker/image/image-size/merhylstudio/phpmyfaq/2.9.7.svg)](https://hub.docker.com/r/merhylstudio/phpmyfaq/)
 [![Layers](https://shields.beevelop.com/docker/image/layers/merhylstudio/phpmyfaq/2.9.7.svg)](https://hub.docker.com/r/merhylstudio/phpmyfaq/)
 
@@ -19,7 +18,7 @@ to use installation script.
 
 ## To run localy
 
-Clone this repository and `cd` to it.
+Clone this [repository](https://github.com/Maghin/docker-phpmyfaq/) and `cd` to it.
 
     git clone git@github.com:Maghin/docker-phpmyfaq.git
     cd docker-phpmyfaq
@@ -29,11 +28,10 @@ Run docker-compose to start the full app on your system.
     docker-compose up
 
 > **Note:**
-> - This command will create a folder volumes in your reporitory. You can manage
-> - it as you want (fill, delete, etc...)
+> - This command will create a folder volumes in your reporitory. You can manage it as you want (fill, delete, etc...)
 
 ## On [Rancher](http://rancher.com/)
 
-Use the [rancher](/Maghin/PhpMyFAQ/tree/rancher) branch to get a docker-compose.yml
+Use the [rancher](https://github.com/Maghin/docker-phpmyfaq/tree/rancher) branch to get a docker-compose.yml
 file fully adapted to rancher with named volumes. You just have to paste it in the
 [Rancher API](http://rancher.com/docs/rancher/v1.6/en/cattle/adding-services/#adding-services-with-rancher-compose).
