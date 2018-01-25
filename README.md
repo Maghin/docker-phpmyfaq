@@ -1,3 +1,6 @@
+# DEPRECATION NOTICE
+This image has been deprecated in favor of the official PhpMyFAQ image provided and maintained by the community. Please consider to use the Dockerfile in the [official PhpMyFAQ repo](https://github.com/thorsten/phpMyFAQ/) starting from 3.0 branch.
+
 # PhpMyFaq on Docker
 
 [![Size](https://shields.beevelop.com/docker/image/image-size/merhylstudio/phpmyfaq/2.9.7.svg)](https://hub.docker.com/r/merhylstudio/phpmyfaq/)
